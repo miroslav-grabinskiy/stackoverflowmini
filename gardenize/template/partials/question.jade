@@ -1,0 +1,85 @@
+extends ../layouts/layout.jade
+block content
+	h1.question-title
+		| #{question.title}
+	div.mainbar#question.clearfix
+		div.question.clearfix
+			div.stats
+				a.arrow.up(href="#")
+				div.evaluation
+					| 0
+				a.arrow.down(href="#")
+			div.question-container
+				p
+					| #{question.body}
+				div.bottom.clearfix
+					div.tags
+						a.tag(href="#")
+							| node.js
+						a.tag(href="#")
+							| express
+						a.tag(href="#")
+							| mongoose
+					div.author
+						div.time
+							| asked 1 min ago
+						div.user-info.blue-color.clearfix
+							div.user-avatar
+								a(href="#")
+									img(src="/template/images/avatar.png" title="NickName" class="avatar")
+							div.user
+								a.blue-color(href="#")
+									| #{question.userName}
+								div.user-stats
+									span.reputation-score
+										| 129
+									span.badge.badge-bronze
+									span.badgecount
+										| 5
+		div.question-answers
+			if answers.length > 0
+				h2 
+					| #{answers.length}  Answers
+				ul
+					each answer in answers
+						li.clearfix
+							div.question
+							div.stats
+								a.arrow.up(href="#")
+								div.evaluation
+									| 0
+								a.arrow.down(href="#")
+							div.question-container.clearfix
+								p
+									| #{answer.body}
+								div.bottom.clearfix
+									div.tags
+									div.author
+										div.time
+											| answered 1 min ago
+										div.user-info.blue-color.clearfix
+											div.user-avatar
+												a(href="#")
+													img(src="/template/images/avatar.png" title="NickName" class="avatar")
+											div.user
+												a.blue-color(href="#")
+													| #{answer.userName}
+												div.user-stats
+													span.reputation-score
+														| 129
+													span.badge.badge-bronze
+													span.badgecount
+														| 5
+		h2 
+			| Your Answer
+		if user
+			div.form-answer.ask
+				form#question-form(action="/answer/#{question._id}" method="post")
+					textarea(required name="body")
+					input(type="submit" value="Post Your Answer")
+		else
+			p 
+			| login pls
+
+
+	include ../blocks/right.jade

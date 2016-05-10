@@ -1,0 +1,24 @@
+{
+  "name": "y",
+  "version": "0.0.1",
+  "description": "task gardenize",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "connect-mongo": "^1.1.0",
+    "connect-mongodb": "^1.1.5",
+    "cookie-parser": "^1.4.1",
+    "express": "^4.13.4",
+    "g": "^2.0.0",
+    "mongoose": "^4.4.2",
+    "nconf": "^0.8.4",
+    "async": "*"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "Miroslav Grabinskiy",
+  "license": "ISC"
+}

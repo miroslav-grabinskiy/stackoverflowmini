@@ -1,0 +1,10 @@
+extends ../layouts/layout.jade
+block content
+	div.mainbar.ask
+		form#question-form(action="/ask" method="post")
+			label
+				span 
+					| Title
+				input.title(type="text" name="title" maxlength="300" tabindex="300" placeholder="What's your programming question? Be specific." data-min-length="15" data-max-length="150" required)
+			textarea(required name="body")
+			input(type="submit" value="Post Your Question")

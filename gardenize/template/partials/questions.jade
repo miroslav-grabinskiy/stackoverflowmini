@@ -1,0 +1,95 @@
+extends ../layouts/layout.jade
+block content
+	div.mainbar#questions
+		div.subheader.clearfix
+			h1
+				| All Questions
+			div#tabs
+				a.current(href="#")
+					| Newest
+				a(href="#")
+					span.indicator
+						| 389
+					| Featured
+				a(href="#")
+					| Frequent
+				a(href="#")
+					| Votes
+				a(href="#")
+					| Active
+				a#tab-switcher(href="#")
+					| Unanswered
+		ul.questions-container
+				each question in questions
+					li.question.clearfix
+						div.statscontainer
+							div.stats
+								span.count.votes
+									strong
+										| 5
+								span.count-type.votes
+									| votes
+								span.count.answer
+									strong
+										| 111
+								span.count-type.answer
+									| answers
+							div.views(title="5 views")
+								| 5 views
+						div.summary
+							h3
+								a.blue-color(href="/question/#{question._id}")
+									| #{question.title}
+							div.excerpt
+									| #{question.body}
+							div.tags
+								a.tag(href="#")
+									| node.js
+								a.tag(href="#")
+									| express
+								a.tag(href="#")
+									| mongoose
+							div.author
+								div.time
+									| asked 1 min ago
+								div.user-info.blue-color.clearfix
+									div.user-avatar
+										a(href="#")
+											img(src="/template/images/avatar.png" title="NickName" class="avatar")
+									div.user
+										a.blue-color(href="#")
+											| #{question.userName}
+										div.user-stats
+											span.reputation-score
+												| 129
+											span.badge.badge-bronze
+											span.badgecount
+												| 5
+		div.pagination.clearfix
+			div.pages
+				a.current(href="#")
+					| 1
+				a(href="#")
+					| 2
+				a(href="#")
+					| 3
+				a(href="#")
+					| 4
+				a(href="#")
+					| 5
+				span.delimiter
+					| ...
+				a(href="#")
+					|776677
+				a(href="#")
+					| next
+			div.sort
+				a.current(href="#")
+					| 15
+				a(href="#")
+					| 30
+				a(href="#")
+					| 45
+				span
+					| per page
+	include ../blocks/right.jade

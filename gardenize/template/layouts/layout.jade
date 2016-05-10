@@ -1,0 +1,15 @@
+doctype
+html
+	head
+		include ../blocks/head.jade
+	body
+		.wrap
+			.main(rel='main')
+				include ../blocks/topbar.jade
+				include ../blocks/header.jade
+				div.content
+					div.content-container.clearfix
+						block content
+		footer
+			div.footer-container
+				include ../blocks/footer.jade

@@ -1,0 +1,23 @@
+{
+	"port": 9010,
+	"mongoose": {
+		"uri": "mongodb://localhost/gardenize",
+		"options": {
+			"server": {
+				"socketOptions": {
+					"keepAlive": 1
+				}
+			}
+		}
+	},
+	"session": {
+		"secret": "secr",
+		"key": "sid",
+		"cookie": {
+			"path": "/",
+			"httpOnly": true,
+			"maxAge": 36001112
+		},
+		"liveAge": 12096000001112
+	}
+}
