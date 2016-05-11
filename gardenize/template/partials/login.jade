@@ -5,7 +5,12 @@ html
 		meta(charset="utf-8")
 	body
 		| Сорри, Вертска в процессе разработки
+		br
+		a(href="/registration")
+			| Зарегистрироваться
 		form(action="/login" method="post")
-			input(type="text" name="userName")
-			input(type="password" name="password")
+			input(type="text" name="userName" placeholder="login")
+			br
+			input(type="password" name="password" placeholder="password")
+			br
 			input(type="submit" value="login")
