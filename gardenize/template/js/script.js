@@ -6,6 +6,13 @@ $( document ).ready(function() {
 		var topbarIconFlag = false;
 		var linkContainerFlag = false;
 
+		var addFocus = function() {
+			topbarIconFlag = false;
+			$('.topbar-dialog').removeClass('show').addClass('hide');
+			$('.topbar-icon').removeClass('bg-lightwhite').addClass('bg-hover-lightblack');
+			$('.links-container.help-container').removeClass('bg-lightwhite').addClass('bg-hover-lightblack');
+		};
+
 		$('.topbar-dialog').click(function() {
 	    	event.stopPropagation();
 	    });
@@ -17,12 +24,14 @@ $( document ).ready(function() {
 				topbarIconFlag = false;
 				$('.topbar-dialog').removeClass('show').addClass('hide');
 				$(this).removeClass('bg-lightwhite').addClass('bg-hover-lightblack');
+				$('html').bind('click', addFocus);
 	    	} else {
 				linkContainerFlag = true;
 				$('.topbar-dialog').removeClass('show').addClass('hide');
 				$('.topbar-icon').removeClass('bg-lightwhite').addClass('bg-hover-lightblack');
 				$(this).removeClass('bg-hover-lightblack').addClass('bg-lightwhite');
 				$(this).find('.topbar-dialog').removeClass('hide').addClass('show');
+				$('html').unbind('click', addFocus);
 			}
 		});
 
@@ -33,6 +42,7 @@ $( document ).ready(function() {
 				topbarIconFlag = false;
 				$('.topbar-dialog').removeClass('show').addClass('hide');
 				$(this).removeClass('bg-lightwhite').addClass('bg-hover-lightblack');
+				$('html').unbind('click', addFocus);
 	    	} else {
 				topbarIconFlag = true;
 
@@ -40,6 +50,7 @@ $( document ).ready(function() {
 				$('.links-container.help-container').removeClass('bg-lightwhite').addClass('bg-hover-lightblack');
 				$(this).removeClass('bg-hover-lightblack').addClass('bg-lightwhite');
 				$(this).find('.topbar-dialog').removeClass('hide').addClass('show');
+				$('html').bind('click', addFocus);
 	    	}
 
 		});
@@ -54,12 +65,7 @@ $( document ).ready(function() {
 			}
 		});
 
-		$('html').click(function() {
-			topbarIconFlag = false;
-			$('.topbar-dialog').removeClass('show').addClass('hide');
-			$('.topbar-icon').removeClass('bg-lightwhite').addClass('bg-hover-lightblack');
-			$('.links-container.help-container').removeClass('bg-lightwhite').addClass('bg-hover-lightblack');
-		});
+
 
 		$('.logout').click(function() {
 			$(this).find('form').submit();
