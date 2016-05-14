@@ -11,7 +11,9 @@ var ask = function(req, res, next) {
 		var question = new Question({
 			title: title,
 			body: body,
-			userName: userName
+			userName: userName,
+			views: 0,
+			answers: 0
 		});
 
 		question.save(function(err, question, affected) {
@@ -36,12 +38,18 @@ var answer = function(req, res, next) {
 			userName: userName
 		});
 
-		answer.save(function(err, answer, affected) {
+		Question.findOneAndUpdate({_id: questionId}, { $inc: { answers: 1 } }, function(err, question) {
 			if (err) {
 				return next(err);
 			}
 
-			res.redirect('/question/' + questionId);
+			answer.save(function(err, answer, affected) {
+				if (err) {
+					return next(err);
+				}
+
+				res.redirect('/question/' + questionId);
+			});
 		});
 	});
 };
