@@ -16,6 +16,12 @@ var schema = new Schema({
 	created: {
 		type: Date,
 		default: Date.now
+	},
+	views: {
+		type: Number
+	},
+	answers: {
+		type: Number
 	}
 });
 
