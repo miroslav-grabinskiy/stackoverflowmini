@@ -26,6 +26,14 @@ var pagesRoutes = function(app) {
 		pagesHandler.webQuestionPage(req, res, next);
 	});
 
+	app.get('/:userName/questions/unanswerred', function(req, res, next) {
+		pagesHandler.webUnanswerredPage(req, res, next);
+	});
+
+	app.get('/:userName/questions/answerred', function(req, res, next) {
+		pagesHandler.webAnswerredPage(req, res, next);
+	});
+
 };
 
 module.exports = pagesRoutes;
