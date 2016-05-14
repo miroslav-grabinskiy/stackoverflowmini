@@ -10,6 +10,19 @@ var webIndexPage = function(req, res, next) {
 var webQuestionsPage = function(req, res, next) {
 	userHandler.auth(req, res, next, function(user) {
 		Question.find({}).sort({created: 'desc'}).exec(function(err, questions) {
+			questionsLength = questions.length;
+
+			//for old questions without views and answers
+			for (var i = 0; i < questionsLength; i++) {
+				if (!questions[i].views) {
+					questions[i].views = 0;
+				}
+
+				if (!questions[i].answers) {
+					questions[i].answers = 0;
+				}
+			}
+
 			res.render('partials/questions.jade', {initial : false, user: user, questions: questions});
 		});
 	});
@@ -39,9 +52,19 @@ var webQuestionPage = function(req, res, next) {
 	userHandler.auth(req, res, next, function(user) {
 
 		async.parallel([ function(callback) {
-			Question.findOne({_id: questionId}, function(err, question) {
+			Question.findOneAndUpdate({_id: questionId}, { $inc: { views: 1 } }, function(err, question) {
 				if (err) {
 					return next(err);
+				}
+
+				//for old questions without views and answers
+				if (!question.views) {
+					question.views = 0;
+				}
+
+				//for old questions without views and answers
+				if (!question.answers) {
+					question.answers = 0;
 				}
 
 				callback(null, question);
@@ -63,9 +86,57 @@ var webQuestionPage = function(req, res, next) {
 	});
 };
 
+var webAnswerredPage = function(req, res, next) {
+	var userName = req.params.userName;
+
+	userHandler.auth(req, res, next, function(user) {
+		Question.find({userName: userName, answers: { $ne: null } }).sort({created: 'desc'}).exec(function(err, questions) {
+			questionsLength = questions.length;
+
+			//for old questions without views and answers
+			for (var i = 0; i < questionsLength; i++) {
+				if (!questions[i].views) {
+					questions[i].views = 0;
+				}
+
+				if (!questions[i].answers) {
+					questions[i].answers = 0;
+				}
+			}
+
+			res.render('partials/questions.jade', {initial : false, user: user, questions: questions});
+		});
+	});
+}
+
+var webUnanswerredPage = function(req, res, next) {
+	var userName = req.params.userName;
+
+	userHandler.auth(req, res, next, function(user) {
+		Question.find({userName: userName, answers: 0}).sort({created: 'desc'}).exec(function(err, questions) {
+			questionsLength = questions.length;
+
+			//for old questions without views and answers
+			for (var i = 0; i < questionsLength; i++) {
+				if (!questions[i].views) {
+					questions[i].views = 0;
+				}
+
+				if (!questions[i].answers) {
+					questions[i].answers = 0;
+				}
+			}
+
+			res.render('partials/questions.jade', {initial : false, user: user, questions: questions});
+		});
+	});
+}
+
 module.exports.webIndexPage = webIndexPage;
 module.exports.webQuestionsPage = webQuestionsPage;
 module.exports.webQuestionPage = webQuestionPage;
 module.exports.webRegistrationPage = webRegistrationPage;
 module.exports.webLoginPage = webLoginPage;
 module.exports.webAskPage = webAskPage;
+module.exports.webUnanswerredPage = webUnanswerredPage;
+module.exports.webAnswerredPage = webAnswerredPage;
