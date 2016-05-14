@@ -90,7 +90,7 @@ var webAnswerredPage = function(req, res, next) {
 	var userName = req.params.userName;
 
 	userHandler.auth(req, res, next, function(user) {
-		Question.find({userName: userName, answers: { $ne: null } }).sort({created: 'desc'}).exec(function(err, questions) {
+		Question.find({userName: userName, answers: { $ne: 0 } }).sort({created: 'desc'}).exec(function(err, questions) {
 			questionsLength = questions.length;
 
 			//for old questions without views and answers
