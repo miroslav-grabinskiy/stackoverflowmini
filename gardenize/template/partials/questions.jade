@@ -17,8 +17,10 @@ block content
 					| Votes
 				a(href="#")
 					| Active
-				a#tab-switcher(href="#")
+				a#tab-switcher(href="/#{user}/questions/unanswerred")
 					| Unanswered
+				a#tab-switcher(href="/#{user}/questions/answerred")
+					| answered
 		ul.questions-container
 				each question in questions
 					li.question.clearfix
@@ -31,11 +33,11 @@ block content
 									| votes
 								span.count.answer
 									strong
-										| 111
+										| #{question.answers}
 								span.count-type.answer
 									| answers
 							div.views(title="5 views")
-								| 5 views
+								| #{question.views} views
 						div.summary
 							h3
 								a.blue-color(href="/question/#{question._id}")
