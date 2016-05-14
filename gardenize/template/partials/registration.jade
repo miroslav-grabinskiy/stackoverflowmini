@@ -1,16 +1,23 @@
-html
-	head
-		title 
-			| login
-		meta(charset="utf-8")
-	body
-		| Сорри, Верcтка в процессе разработки
-		br
-		a(href="/login")
-			| Авторизироваться
+extends ../layouts/layout.jade
+block content
+	div.users-page
+		div.subheader
+			div#tabs
+				a(href="/login")
+					| log in
+				a.current(href="/registration")
+					| sign up
+
 		form(action="/registration" method="post")
-			input(type="text" name="userName" placeholder="login")
-			br
-			input(type="password" name="password" placeholder="password")
-			br
-			input(type="submit" value="registration")
+			label
+				span.label-name 
+					| Email
+				input(type="text" name="userName" placeholder="login")
+			label
+				span.label-name
+					| Password
+				input(type="password" name="password" placeholder="password")
+			div.other.clearfix
+				a.more-options.blue-color(href="#")
+						| more sign up options
+				input(type="submit" value="registration")
